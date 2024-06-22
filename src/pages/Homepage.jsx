@@ -1,6 +1,6 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, InputBase, Paper, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,15 +12,13 @@ import banner2 from "../assets/banner2.png";
 import product1 from "../assets/product-1.png";
 import product2 from "../assets/product-2.png";
 import termscond from "../assets/terms&cond.png";
+import SearchIcon from "@mui/icons-material/Search";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
+
+
 
 const slideImages = [
   {
@@ -57,8 +55,30 @@ const products = [
 ];
 
 const Homepage = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
+    <Header/>
+     <Paper
+            component="form"
+            sx={{
+              mx:{lg:0,sm:2,xs:2,md:2},
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <IconButton sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+            <InputBase
+              sx={{ ml:1, flex: 1 }}
+              placeholder="Search"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Paper>
       <Grid sx={{ display:{lg:'block',md:'none',sm:'none',xs:'none'} }}>
         <div className="slide-container" style={{ marginTop: "20px" }}>
           <Slide>
@@ -100,7 +120,7 @@ const Homepage = () => {
       >
         Pack Of 1 Kg Collection
       </Typography>
-      <Grid container>
+      <Grid container sx={{ p:{lg:'0px',sm:'5px',xs:'5px'}}}>
         {products.map((e) => (
           <Grid item lg={6} md={6} sm={6} xs={6}>
             <Box>
@@ -110,9 +130,10 @@ const Homepage = () => {
                     src={e.img}
                     alt="product"
                     style={{
-                      width: "200px",
-                      height: "200px",
-                      position: "relative",
+                      width: "150px",
+                      margin:'auto',
+                      display:'block',
+                      height: "150px",
                     }}
                   />
                   <span
@@ -147,6 +168,7 @@ const Homepage = () => {
                     size="large"
                     variant="contained"
                     fullWidth
+                    onClick={()=>{navigate("/single-product")}}
                     sx={{ backgroundColor: "#00321F" }}
                   >
                     Add To Cart
@@ -160,8 +182,7 @@ const Homepage = () => {
       <Box sx={{display:'flex',justifyContent:'center'}}>
       <Button variant="outlined" sx={{ border:'2px solid #00321F',mt:2,color:'#00321F' }}>View More</Button>
       </Box>
-      
-
+      <Footer/>
       {/* products end */}
     </>
   );

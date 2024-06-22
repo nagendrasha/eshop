@@ -1,13 +1,9 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import {
   AppBar,
   Box,
   Button,
-  IconButton,
-  InputBase,
-  Paper,
   Toolbar,
   Typography
 } from "@mui/material";
@@ -34,24 +30,6 @@ const Header = () => {
               <ShoppingBagOutlinedIcon style={{ color: "black" }} />
             </Button>
           </Toolbar>
-          <Paper
-            component="form"
-            sx={{
-              mx:{lg:0,sm:2,xs:2,md:2},
-              p: "2px 4px",
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <IconButton sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-            <InputBase
-              sx={{ ml:1, flex: 1 }}
-              placeholder="Search"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Paper>
         </AppBar>
       </Box>
     </>

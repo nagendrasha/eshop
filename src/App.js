@@ -1,19 +1,17 @@
-import { Grid } from '@mui/material';
-import './App.css';
-import Header from './components/Header';
-import Homepage from './components/Homepage';
-import Footer from './components/Footer';
+import "./App.css";
+import Homepage from "./pages/Homepage";
+import Product from "./pages/Product";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-    <Grid container sx={{ display:'flex',justifyContent:'center' }}>
-      <Grid item lg={4}>
-        <Header/>
-        <Homepage/>
-        <Footer/>
-      </Grid>
-    </Grid>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Homepage />} />
+          <Route exact path="/single-product" element={<Product/>}/>
+        </Routes>
+      </Router>
     </>
   );
 }

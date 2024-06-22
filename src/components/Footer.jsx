@@ -36,7 +36,7 @@ const Footer = () => {
 
   return (
     <>
-      <Grid container sx={{ textAlign: "center", my: 2 }}>
+      <Grid container sx={{ textAlign: "center", my: 2,p:{lg:'0px',sm:'5px',xs:'5px'} }}>
         {menu1.map((e) => (
           <Grid item lg={4} sm={4} md={4} xs={4}>
             <Box>
@@ -110,9 +110,9 @@ const Footer = () => {
             Follow Us
           </Typography>
           <Box>
-            <FacebookIcon sx={{ fontSize:'40px' }}/>
-            <TwitterIcon sx={{ fontSize:'40px' }}/>
-            <InstagramIcon sx={{ fontSize:'40px' }}/>
+            <FacebookIcon sx={{ fontSize:'40px',marginRight:'8px' }}/>
+            <TwitterIcon sx={{ fontSize:'40px',marginRight:'8px' }}/>
+            <InstagramIcon sx={{ fontSize:'40px',marginRight:'8px' }}/>
             <LinkedInIcon sx={{ fontSize:'40px' }}/>
           </Box>
         </Grid>
