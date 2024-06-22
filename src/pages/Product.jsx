@@ -46,7 +46,7 @@ const Product = () => {
         </Grid>
       </Grid>
       {/* product */}
-      <Grid container>
+      <Grid container sx={{ p:{lg:'0px',sm:'5px',xs:'10px'} }}>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <img
             src={product1}
@@ -97,7 +97,7 @@ const Product = () => {
           <span style={{ color: "orange", marginLeft: "5px" }}> (85%) Off</span>{" "}
         </span>
 
-        <Grid item lg={12} sx={{ mt: 2 }}>
+        <Grid item lg={12} sm={12} md={12} xs={12} sx={{ mt: 2 }}>
           <Typography sx={{ fontWeight: "bold" }}>
             CHECK DELIVERY & SERVICES
           </Typography>
@@ -148,9 +148,10 @@ const Product = () => {
           </span>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <img src={feature} alt="etc" />
+         <Box>
+         <img src={feature} alt="etc" style={{width:'100%'}}  />
+         </Box>
         </Grid>
-
         <Grid
           container
           sx={{ backgroundColor: "#00321F", my: 1, borderRadius: "10px", p: 3,cursor:'pointer' }}
@@ -174,14 +175,15 @@ const Product = () => {
 
           {/* realated products */}
         </Grid>
-      </Grid>
-      <Typography sx={{ fontWeight: "bold", marginTop: "30px" }}>
+        <Typography sx={{ fontWeight: "bold", marginTop: "30px" }}>
         Related Products
       </Typography>
+      </Grid>
       <Grid
         container
         sx={{ p: { lg: "0px", sm: "5px", md: "5px", xs: "5px" }, mt: 2 }}
       >
+        
         <Grid item lg={6} md={6} sm={6} xs={6}>
           <Box>
             <Card variant="outlined">
