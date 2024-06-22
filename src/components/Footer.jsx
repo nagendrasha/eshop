@@ -110,10 +110,10 @@ const Footer = () => {
             Follow Us
           </Typography>
           <Box>
-            <FacebookIcon/>
-            <TwitterIcon/>
-            <InstagramIcon/>
-            <LinkedInIcon/>
+            <FacebookIcon sx={{ fontSize:'40px' }}/>
+            <TwitterIcon sx={{ fontSize:'40px' }}/>
+            <InstagramIcon sx={{ fontSize:'40px' }}/>
+            <LinkedInIcon sx={{ fontSize:'40px' }}/>
           </Box>
         </Grid>
       </Grid>

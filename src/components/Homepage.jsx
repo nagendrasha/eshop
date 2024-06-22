@@ -125,6 +125,7 @@ const Homepage = () => {
                       display: "flex",
                       alignItems: "center",
                       width: "40px",
+                      zIndex:'1000'
                     }}
                   >
                     {e.rating}{" "}
