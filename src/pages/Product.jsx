@@ -19,8 +19,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Countdown from 'react-countdown';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <Header/>
@@ -155,6 +159,8 @@ const Product = () => {
         <Grid
           container
           sx={{ backgroundColor: "#00321F", my: 1, borderRadius: "10px", p: 3,cursor:'pointer' }}
+          onClick={()=>{navigate("/cart")}}
+          
         >
           <Grid item lg={6} md={6} sm={6} xs={6}>
             <span style={{ color: "white", fontSize: "14px" }}>
@@ -183,7 +189,6 @@ const Product = () => {
         container
         sx={{ p: { lg: "0px", sm: "5px", md: "5px", xs: "5px" }, mt: 2 }}
       >
-        
         <Grid item lg={6} md={6} sm={6} xs={6}>
           <Box>
             <Card variant="outlined">
