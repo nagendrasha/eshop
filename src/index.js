@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Grid } from "@mui/material";
+import { AppProvider } from "./context/ProductContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Grid container sx={{ display: "flex", justifyContent: "center" }}>
       <Grid item lg={4}>
-        <App />
+        <AppProvider>
+          <App />
+        </AppProvider>
       </Grid>
     </Grid>
   </React.StrictMode>

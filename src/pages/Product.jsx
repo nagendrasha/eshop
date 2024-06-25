@@ -16,18 +16,16 @@ import StarIcon from "@mui/icons-material/Star";
 import feature from "../assets/feature.png";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import Countdown from 'react-countdown';
+import Countdown from "react-countdown";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const Product = () => {
-
   const navigate = useNavigate();
-
   return (
     <>
-    <Header/>
+      <Header />
       <Grid container>
         <Grid
           item
@@ -50,7 +48,7 @@ const Product = () => {
         </Grid>
       </Grid>
       {/* product */}
-      <Grid container sx={{ p:{lg:'0px',sm:'5px',xs:'10px'} }}>
+      <Grid container sx={{ p: { lg: "0px", sm: "5px", xs: "10px" } }}>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <img
             src={product1}
@@ -152,21 +150,27 @@ const Product = () => {
           </span>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-         <Box>
-         <img src={feature} alt="etc" style={{width:'100%'}}  />
-         </Box>
+          <Box>
+            <img src={feature} alt="etc" style={{ width: "100%" }} />
+          </Box>
         </Grid>
         <Grid
           container
-          sx={{ backgroundColor: "#00321F", my: 1, borderRadius: "10px", p: 3,cursor:'pointer' }}
-          onClick={()=>{navigate("/cart")}}
-          
+          sx={{
+            backgroundColor: "#00321F",
+            my: 1,
+            borderRadius: "10px",
+            p: 3,
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            navigate("/cart");
+          }}
         >
           <Grid item lg={6} md={6} sm={6} xs={6}>
             <span style={{ color: "white", fontSize: "14px" }}>
               Sales Ends Soon <br />
-              <Countdown 
-              date={Date.now() + 480000}/> 
+              <Countdown date={Date.now() + 480000} />
               &nbsp; Hurry! Up
             </span>
           </Grid>
@@ -182,8 +186,8 @@ const Product = () => {
           {/* realated products */}
         </Grid>
         <Typography sx={{ fontWeight: "bold", marginTop: "30px" }}>
-        Related Products
-      </Typography>
+          Related Products
+        </Typography>
       </Grid>
       <Grid
         container
@@ -298,7 +302,7 @@ const Product = () => {
           </Box>
         </Grid>
       </Grid>
-      <Footer/>
+      <Footer />
     </>
   );
 };

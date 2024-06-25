@@ -29,7 +29,6 @@ const Category = () => {
 
   useEffect(()=>{
     getProducts();
-
   },[]);
 
   return (

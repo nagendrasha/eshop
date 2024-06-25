@@ -2,7 +2,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -11,8 +11,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+
+
+  const navigate = useNavigate();
+
   const menu1 = [
     {
       id: 1,
@@ -67,7 +72,8 @@ const Footer = () => {
           }}
         >
           <Typography
-            sx={{ color: "black", borderBottom: "1px solid gray", py: 2 }}
+          onClick={()=>{navigate("/contact")}} 
+            sx={{ color: "black", borderBottom: "1px solid gray", py: 2,cursor:'pointer' }}
           >
             Contact Us
           </Typography>
@@ -81,10 +87,10 @@ const Footer = () => {
                 Our Policy
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>Refund Policy</Typography>
-                <Typography>Shopping Policy</Typography>
-                <Typography>Privacy Policy</Typography>
-                <Typography>Terms & Service</Typography>
+                <Typography onClick={()=>{navigate('/refund-policy')}} sx={{ cursor:'pointer' }} >Refund Policy</Typography>
+                <Typography onClick={()=>{navigate('/privacy-policy')}} sx={{ cursor:'pointer' }} >Privacy Policy</Typography>
+                <Typography onClick={()=>{navigate('/shoppingpolicy')}} sx={{ cursor:'pointer' }}>Shopping Policy</Typography>
+                <Typography onClick={()=>{navigate('/termsofservice')}} sx={{ cursor:'pointer' }}>Terms & Service</Typography>
               </AccordionDetails>
             </Accordion>
           </Typography>
@@ -98,9 +104,9 @@ const Footer = () => {
                 Information
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>About Us</Typography>
-                <Typography>Track Order</Typography>
-                <Typography>Faq</Typography>
+                <Typography onClick={()=>{navigate('/about')}} sx={{ cursor:'pointer' }}>About Us</Typography>
+                <Typography onClick={()=>{navigate('/track')}} sx={{ cursor:'pointer' }}>Track Order</Typography>
+                <Typography onClick={()=>{navigate('/faq')}} sx={{ cursor:'pointer' }}>Faq</Typography>
               </AccordionDetails>
             </Accordion>
           </Typography>

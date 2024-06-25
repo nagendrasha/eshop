@@ -22,6 +22,7 @@ const Cart = () => {
   return (
     <>
       <Header />
+      <Grid container spacing={2} sx={{ padding: "10px" }}>
       <Grid
         container
         sx={{
@@ -40,7 +41,7 @@ const Cart = () => {
             <img
               src={product}
               alt=""
-              style={{ width: "180px", height: "150px" }}
+              style={{ width: "160px", height: "130px" }}
             />
           </Box>
         </Grid>
@@ -87,7 +88,8 @@ const Cart = () => {
           </span>
         </Grid>
       </Grid>
-      <Grid>
+      </Grid>
+      <Grid sx={{p:2}}>
         <Grid lg={12}>
           <Typography sx={{ fontWeight: "bold", marginTop: "30px" }}>
             Price Details (1) Item
@@ -105,6 +107,7 @@ const Cart = () => {
           <Button variant="contained" fullWidth sx={{mt:2,backgroundColor:'#00321F'}}>Place Order</Button>
         </Grid>
       </Grid>
+      
       <Grid container>
         <Grid item lg={12} sx={{ mt:2 }}>
             <img src={safty} alt="" style={{ width:'100%' }} />
