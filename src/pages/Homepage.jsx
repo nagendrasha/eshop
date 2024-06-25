@@ -151,6 +151,7 @@ const Homepage = () => {
                       zIndex: "1000",
                     }}
                   >
+                    4.6
                     {e.rating}{" "}
                     <StarIcon sx={{ fontSize: "16px", color: "green" }} />{" "}
                   </span>
