@@ -1,3 +1,6 @@
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import StarIcon from "@mui/icons-material/Star";
 import {
   Box,
   Button,
@@ -10,19 +13,37 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React from "react";
-import product1 from "../assets/product-1.png";
-import StarIcon from "@mui/icons-material/Star";
-import feature from "../assets/feature.png";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import React, { useState } from "react";
 import Countdown from "react-countdown";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import feature from "../assets/feature.png";
+import product1 from "../assets/product-1.png";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const Product = () => {
   const navigate = useNavigate();
+
+  const [pin, setPin] = useState('');
+  const [text, setText] = useState('CHECK');
+  const [message, setMessage] = useState('');
+
+  const handleChange = (event) => {
+    const input = event.target.value;
+
+    if (/^\d{0,6}$/.test(input)) {
+      setPin(input);
+    }
+
+    if (input.length > 5) {
+      setText('Available');
+      setMessage('2 Day Guaranteed Open Delivery available');
+    } else {
+      setMessage('');
+      setText('CHECK');
+    }
+  };
+
   return (
     <>
       <Header />
@@ -115,13 +136,19 @@ const Product = () => {
           >
             <InputBase
               sx={{ ml: 1, flex: 1 }}
+              type="number"
+              value={pin}
+              onChange={handleChange}
               placeholder="Enter Your Pin Code"
               inputProps={{ "aria-label": "search" }}
             />
             <IconButton sx={{ p: "10px" }} aria-label="search">
-              <span style={{ fontSize: "14px" }}>check</span>
+              <span style={{ fontSize: "14px",color: text=== "Available" ? 'green':'' }}>{text}</span>
             </IconButton>
           </Paper>
+          <br />
+          <span style={{ color:'green',fontSize:'18px' }} >{message}</span>
+          <br />
           <br />
           <span>
             Pay on delivery might be available <br /> Easy 14 days returns and
@@ -162,6 +189,8 @@ const Product = () => {
             borderRadius: "10px",
             p: 3,
             cursor: "pointer",
+            position:'sticky',
+            bottom:0
           }}
           onClick={() => {
             navigate("/cart");
@@ -209,23 +238,40 @@ const Product = () => {
                 />
                 <span
                   style={{
-                    marginTop: "-40px",
-                    fontSize: "14px",
+                    marginTop: "-20px",
+                    fontSize: "12px",
                     border: "1px solid gray",
                     borderRadius: "20px",
                     padding: "5px",
                     display: "flex",
                     alignItems: "center",
-                    width: "40px",
-                    zIndex: "1000",
+                    width: "30px",
+                    zIndex: 9999,
                   }}
                 >
                   4.6 <StarIcon sx={{ fontSize: "16px", color: "green" }} />{" "}
                 </span>
-                <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>
-                  Healthy & Tasty Premium Nuts and Berries Mix (1 Kg){" "}
-                  <FavoriteBorderIcon />
-                </Typography>
+                <Grid container>
+                  <Grid item lg={10} md={10} sm={10} xs={10}>
+                    <span
+                      style={{ fontWeight: "bold", fontSize: "14px" }}
+                      color="black"
+                      gutterBottom
+                    >
+                      {/* {e.name.slice(0, 40) + `..`} */}
+                      100% Natural Premium California Almonds (1 Kg)
+                    </span>
+                  </Grid>
+                  <Grid item lg={2} md={2} sm={2} xs={2}>
+                    <span
+                      style={{ fontWeight: "bold" }}
+                      color="black"
+                      gutterBottom
+                    >
+                      <FavoriteBorderIcon />
+                    </span>
+                  </Grid>
+                </Grid>
                 <span>
                   ₹ 299 <del>₹ 599 </del>{" "}
                   <span style={{ color: "orange", marginLeft: "5px" }}>
@@ -263,23 +309,40 @@ const Product = () => {
                 />
                 <span
                   style={{
-                    marginTop: "-40px",
-                    fontSize: "14px",
+                    marginTop: "-20px",
+                    fontSize: "12px",
                     border: "1px solid gray",
                     borderRadius: "20px",
                     padding: "5px",
                     display: "flex",
                     alignItems: "center",
-                    width: "40px",
-                    zIndex: "1000",
+                    width: "30px",
+                    zIndex: 9999,
                   }}
                 >
                   4.6 <StarIcon sx={{ fontSize: "16px", color: "green" }} />{" "}
                 </span>
-                <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>
-                  Healthy & Tasty Premium Nuts and Berries Mix (1 Kg){" "}
-                  <FavoriteBorderIcon />
-                </Typography>
+                <Grid container>
+                  <Grid item lg={10} md={10} sm={10} xs={10}>
+                    <span
+                      style={{ fontWeight: "bold", fontSize: "14px" }}
+                      color="black"
+                      gutterBottom
+                    >
+                      {/* {e.name.slice(0, 40) + `..`} */}
+                      100% Natural Premium California Almonds (1 Kg)
+                    </span>
+                  </Grid>
+                  <Grid item lg={2} md={2} sm={2} xs={2}>
+                    <span
+                      style={{ fontWeight: "bold" }}
+                      color="black"
+                      gutterBottom
+                    >
+                      <FavoriteBorderIcon />
+                    </span>
+                  </Grid>
+                </Grid>
                 <span>
                   ₹ 299 <del>₹ 599 </del>{" "}
                   <span style={{ color: "orange", marginLeft: "5px" }}>
