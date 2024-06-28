@@ -42,7 +42,7 @@ const Footer = () => {
   return (
     <>
       <Grid container sx={{ textAlign: "center", my: 2,p:{lg:'0px',sm:'5px',xs:'5px'} }}>
-        {menu1.map((e) => (
+        {menu1.map((e,key) => (
           <Grid item lg={4} sm={4} md={4} xs={4}>
             <Box>
               <IconButton>

@@ -1,20 +1,21 @@
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Error from "./Error";
+import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Category from "./pages/Category";
+import Charkha from "./pages/Charkha";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
+import Faq from "./pages/Faq";
 import Homepage from "./pages/Homepage";
 import Payment from "./pages/Payment";
-import Product from "./pages/Product";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Refundreturn from "./pages/Refundreturn";
 import Privacypolicy from "./pages/Privacypolicy";
+import Product from "./pages/Product";
+import Refundreturn from "./pages/Refundreturn";
 import Shoppolicy from "./pages/Shoppolicy";
 import Termsofservice from "./pages/Termsofservice";
-import About from "./pages/About";
 import Trackorder from "./pages/Trackorder";
-import Faq from "./pages/Faq";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Homepage />} />
-          <Route exact path="/single-product" element={<Product />} />
+          <Route exact path="/charkha" element={<Charkha />} />
+          <Route exact path="/single-product/:slug" element={<Product />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/checkout/payment" element={<Payment />} />

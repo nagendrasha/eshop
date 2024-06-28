@@ -1,5 +1,5 @@
+import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
-import { createContext, useEffect, useReducer } from "react";
 import reducer from "../reducer/productReducer";
 
 const AppContext = createContext();
@@ -10,24 +10,24 @@ const initialState = {
   isLoading: false,
   isError: false,
   products: [],
-  relatedProducts: [],
+  featureProducts: [],
 };
 
 const AppProvider = ({ children }) => {
-  // use reducer
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const getProducts = async (url) => {
     dispatch({ type: "SET_LOADING" });
     try {
       const res = await axios.get(url);
-      const products = await res.data.products;
-      dispatch({ type: "MY_API_PRODUCTS", payload: products });
+      const products = await res.data;
+      // console.log(products);
+      dispatch({ type: "SET_API_DATA", payload: products });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
     }
   };
+
   useEffect(() => {
     getProducts(API);
   }, []);
@@ -36,4 +36,10 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
   );
 };
-export { AppProvider };
+
+// custom hooks
+const useProductContext = () => {
+  return useContext(AppContext);
+};
+
+export { AppProvider, AppContext, useProductContext };

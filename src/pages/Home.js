@@ -1,7 +1,6 @@
-// Homepage.js
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SearchIcon from "@mui/icons-material/Search";
+import StarIcon from "@mui/icons-material/Star";
 import {
   Box,
   Button,
@@ -10,13 +9,13 @@ import {
   InputBase,
   Paper,
   Typography,
-  Card,
-  CardActions,
-  CardContent,
 } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SearchIcon from "@mui/icons-material/Search";
-import StarIcon from "@mui/icons-material/Star";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import banner1 from "../assets/banner1.png";
@@ -36,19 +35,17 @@ const slideImages = [
   },
 ];
 
-const API = "https://api.adelsocial.com/api/product";
-
+const API = "https://api.adelsocial.com/api/product-by-category/1";
 
 const Homepage = () => {
   const navigate = useNavigate();
+
   const [data, setData] = useState([]);
 
   const getProducts = async () => {
     const res = await axios.get(API);
-    setData(res.data.products.data);
+    setData(res.data.products);
   };
-
-  console.log(data);
 
   useEffect(() => {
     getProducts();
@@ -126,13 +123,13 @@ const Homepage = () => {
         Pack Of 1 Kg Collection
       </Typography>
       <Grid container sx={{ p: { lg: "0px", sm: "5px", xs: "5px" } }}>
-        {data.map((e) => (
-          <Grid item lg={6} md={6} sm={6} xs={6} key={e.id}>
+        {data.map((e, key = 0) => (
+          <Grid item lg={6} md={6} sm={6} xs={6}>
             <Box>
               <Card
                 variant="outlined"
                 onClick={() => {
-                  navigate(`/single-product/${e.slug}`);
+                  navigate("/single-product");
                 }}
               >
                 <CardContent>
@@ -166,7 +163,7 @@ const Homepage = () => {
                   <Grid container>
                     <Grid item lg={10} md={10} sm={10} xs={10}>
                       <span
-                        style={{ fontWeight: "bold", fontSize: "14px" }}
+                        style={{ fontWeight: "bold",fontSize:'14px' }}
                         color="black"
                         gutterBottom
                       >
@@ -183,6 +180,10 @@ const Homepage = () => {
                       </span>
                     </Grid>
                   </Grid>
+                  {/* <span style={{ fontWeight:'bold',display:{lg:'none',md:'block',sm:'block',xs:'block'} }} color="black" gutterBottom>
+                    {e.name.slice(0, 40) + `..`} <FavoriteBorderIcon />
+                  </span> */}
+
                   <br />
                   <span style={{ fontSize: "15px" }}>
                     ₹ {e.offer_price} <del> ₹ {e.price}</del>{" "}
@@ -198,7 +199,7 @@ const Homepage = () => {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      navigate(`/single-product/${e.slug}`);
+                      navigate("/single-product/:id");
                     }}
                     sx={{ backgroundColor: "#00321F" }}
                   >

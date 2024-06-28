@@ -2,8 +2,17 @@ const ProductReducer = (state, action) => {
   switch (action.type) {
     case "SET_LOADING":
       return { ...state, isLoading: true };
-    case "MY_API_PRODUCTS":
-      return { ...state, products: action.payload, loading: false };
+
+      case "SET_API_DATA":
+      // const featureData = action.payload.filter((curElem) => {
+      //   return curElem.featured === true;
+      // });
+      return {
+        ...state,
+        isLoading: false,
+        products: action.payload,
+        // featureProducts: featureData,
+      };
     case "API_ERROR":
       return { ...state, isError: action.payload, loading: false };
     default:

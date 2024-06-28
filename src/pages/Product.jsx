@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import StarIcon from "@mui/icons-material/Star";
@@ -7,21 +8,28 @@ import {
   Card,
   CardActions,
   CardContent,
+  CircularProgress,
   Grid,
   IconButton,
   InputBase,
   Paper,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
 import feature from "../assets/feature.png";
 import product1 from "../assets/product-1.png";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Product = () => {
+
+  const { slug } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
   const [pin, setPin] = useState('');
@@ -43,6 +51,34 @@ const Product = () => {
       setText('CHECK');
     }
   };
+
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`https://api.adelsocial.com/api/product/${slug}`);
+        setProduct(res.data.product);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!product) {
+    return <Typography>Product not found</Typography>;
+  }
+
 
   return (
     <>
@@ -72,7 +108,7 @@ const Product = () => {
       <Grid container sx={{ p: { lg: "0px", sm: "5px", xs: "10px" } }}>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <img
-            src={product1}
+            src={`https://api.adelsocial.com/` + product.thumb_image}
             alt="product"
             style={{
               width: "300px",
@@ -101,7 +137,7 @@ const Product = () => {
         <Grid item lg={3} md={3} sm={3} xs={3}>
           <Box sx={{ border: "2px solid black", borderRadius: "10px" }}>
             <img
-              src={product1}
+              src={`https://api.adelsocial.com/` + product.thumb_image}
               alt="product"
               style={{
                 width: "100px",
@@ -112,14 +148,16 @@ const Product = () => {
             />
           </Box>
         </Grid>
+        <Grid container>
         <span style={{ marginTop: "10px", fontWeight: "bold" }}>
-          Healthy & Tasty Premium Nuts and Berries Mix (1 Kg)
+          {product.name}
         </span>
+        </Grid>
         <span style={{ marginTop: "5px" }}>
-          ₹ 299 <del> ₹ 599</del>{" "}
+          ₹ {product.offer_price} <del> ₹ {product.price}</del>{" "}
           <span style={{ color: "orange", marginLeft: "5px" }}> (85%) Off</span>{" "}
         </span>
-
+        
         <Grid item lg={12} sm={12} md={12} xs={12} sx={{ mt: 2 }}>
           <Typography sx={{ fontWeight: "bold" }}>
             CHECK DELIVERY & SERVICES
@@ -158,22 +196,7 @@ const Product = () => {
             Product Details
           </Typography>
           <span>
-            When you think of macadamia nuts, Indiais not the place where you’d
-            think you can find them. And even if you do, themacadamia nuts
-            costis often so high that it doesn’t feel worth it. Well, Foodilo
-            now brings to you premium quality, exoticmacadamia nuts onlineat a
-            reasonable macadamia price. Here are a few reasons why you shouldbuy
-            macadamia nuts onlinetoday Macadamia nuts have a taste like no
-            other! Its creamy, rich texture and buttery taste make it hard to
-            believe that this nut is packed with nutrients and is actually good
-            for you. Macadamia nuts have more antioxidant levels than most tree
-            nuts. Antioxidants are needed by your body to help prevent cell
-            damage and keep you looking youthful. Eating a handful of macadamia
-            nuts can boost your immunity and enrich you with nutrients.
-            Macadamia nuts are high in calories and unsaturated fats, but don’t
-            be worried about eating them if you are on a diet. The healthy fats
-            in these nuts nourish your body and keep you full, making them one
-            of the best healthy snacks for weight loss.
+            {product.long_description}
           </span>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
