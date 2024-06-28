@@ -2,17 +2,20 @@ import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import safty from "../assets/safty.png";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { AppContext } from "../context/ProductContext";
 
 const Cart = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
+  const {state,dispatch} = useContext(AppContext)
 
   const handleRemoveFromCart = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+    // setCartItems(cartItems.filter((item) => item.id !== id));
+    dispatch({type:'REMOVEFROMCART',payload:id})
   };
 
   const handleCheckout = () => {
@@ -33,7 +36,7 @@ const Cart = ({ cartItems, setCartItems }) => {
     <>
       <Header />
       <Grid container spacing={2} sx={{ padding: "10px" }}>
-        {cartItems.map((item) => (
+        {state?.cartData?.map((item) => (
           <Grid
             key={item.id}
           >

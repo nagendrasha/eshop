@@ -2,15 +2,16 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducer/productReducer";
 
-const AppContext = createContext();
+export const AppContext = createContext('');
 
-const API = "https://api.adelsocial.com/api/product-by-category/1";
+const API = "https://api.adelsocial.com/api/product";
 
 const initialState = {
   isLoading: false,
   isError: false,
   products: [],
   featureProducts: [],
+  cartData:[]
 };
 
 const AppProvider = ({ children }) => {
@@ -33,13 +34,10 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{state,dispatch }}>{children}</AppContext.Provider>
   );
 };
 
 // custom hooks
-const useProductContext = () => {
-  return useContext(AppContext);
-};
 
-export { AppProvider, AppContext, useProductContext };
+export default AppProvider

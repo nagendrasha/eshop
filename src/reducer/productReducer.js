@@ -13,6 +13,15 @@ const ProductReducer = (state, action) => {
         products: action.payload,
         // featureProducts: featureData,
       };
+    case 'ADDTOCART':
+      console.log('add to cart ',action.payload);
+      
+      return {...state,cartData:[...state.cartData,action.payload]}
+      break;
+    case 'REMOVEFROMCART':
+      const newCartData = state.cartData.filter((ele)=>ele.id != action.payload)
+      return {...state,cartData:newCartData}
+
     case "API_ERROR":
       return { ...state, isError: action.payload, loading: false };
     default:

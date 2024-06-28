@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import StarIcon from "@mui/icons-material/Star";
@@ -23,12 +23,14 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { AppContext } from "../context/ProductContext";
 
 const API = "https://api.adelsocial.com/api/product/";
 
 const Product = ({ cartItems, setCartItems }) => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const {state,dispatch} = useContext(AppContext)
   const [product, setProduct] = useState(null);
 
   const getProduct = async () => {
@@ -41,9 +43,13 @@ const Product = ({ cartItems, setCartItems }) => {
   }, [slug]);
 
   const handleAddToCart = (product) => {
+    console.log('products',product)
+    dispatch({type:'ADDTOCART',payload:product})
     setCartItems([...cartItems, product]);
     navigate("/cart");
   };
+
+  
 
   const [pin, setPin] = useState("");
   const [text, setText] = useState("CHECK");
