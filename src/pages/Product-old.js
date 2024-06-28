@@ -24,12 +24,20 @@ import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const API = "https://api.adelsocial.com/api/product/";
 
-const Product = ({ cartItems, setCartItems }) => {
-  const { slug } = useParams();
+const API = "https://api.adelsocial.com/api/product";
+
+
+const Product = (cartItems, setCartItems) => {
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
+  const [data, setData] = useState([]);
+
+  const getProducts = async () => {
+    const res = await axios.get(API);
+    setData(res.data.products.data);
+  };
+
+  // console.log(data);
 
   const getProduct = async () => {
     const res = await axios.get(`${API}${slug}`);
@@ -45,9 +53,18 @@ const Product = ({ cartItems, setCartItems }) => {
     navigate("/cart");
   };
 
-  const [pin, setPin] = useState("");
-  const [text, setText] = useState("CHECK");
-  const [message, setMessage] = useState("");
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const { slug } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  const [pin, setPin] = useState('');
+  const [text, setText] = useState('CHECK');
+  const [message, setMessage] = useState('');
 
   const handleChange = (event) => {
     const input = event.target.value;
@@ -57,15 +74,41 @@ const Product = ({ cartItems, setCartItems }) => {
     }
 
     if (input.length > 5) {
-      setText("Available");
-      setMessage("2 Day Guaranteed Open Delivery available");
+      setText('Available');
+      setMessage('2 Day Guaranteed Open Delivery available');
     } else {
-      setMessage("");
-      setText("CHECK");
+      setMessage('');
+      setText('CHECK');
     }
   };
 
-  return product ? (
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`https://api.adelsocial.com/api/product/${slug}`);
+        setProduct(res.data.product);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!product) {
+    return <Typography>Product not found</Typography>;
+  }
+  return (
     <>
       <Header />
       <Grid container>
@@ -134,15 +177,15 @@ const Product = ({ cartItems, setCartItems }) => {
           </Box>
         </Grid>
         <Grid container>
-          <span style={{ marginTop: "10px", fontWeight: "bold" }}>
-            {product.name}
-          </span>
+        <span style={{ marginTop: "10px", fontWeight: "bold" }}>
+          {product.name}
+        </span>
         </Grid>
         <span style={{ marginTop: "5px" }}>
           ₹ {product.offer_price} <del> ₹ {product.price}</del>{" "}
           <span style={{ color: "orange", marginLeft: "5px" }}> (85%) Off</span>{" "}
         </span>
-
+        
         <Grid item lg={12} sm={12} md={12} xs={12} sx={{ mt: 2 }}>
           <Typography sx={{ fontWeight: "bold" }}>
             CHECK DELIVERY & SERVICES
@@ -166,18 +209,11 @@ const Product = ({ cartItems, setCartItems }) => {
               inputProps={{ "aria-label": "search" }}
             />
             <IconButton sx={{ p: "10px" }} aria-label="search">
-              <span
-                style={{
-                  fontSize: "14px",
-                  color: text === "Available" ? "green" : "",
-                }}
-              >
-                {text}
-              </span>
+              <span style={{ fontSize: "14px",color: text=== "Available" ? 'green':'' }}>{text}</span>
             </IconButton>
           </Paper>
           <br />
-          <span style={{ color: "green", fontSize: "18px" }}>{message}</span>
+          <span style={{ color:'green',fontSize:'18px' }} >{message}</span>
           <br />
           <br />
           <span>
@@ -187,7 +223,9 @@ const Product = ({ cartItems, setCartItems }) => {
           <Typography sx={{ fontWeight: "bold", marginTop: "30px" }}>
             Product Details
           </Typography>
-          <span>{product.long_description}</span>
+          <span>
+            {product.long_description}
+          </span>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Box>
@@ -202,10 +240,10 @@ const Product = ({ cartItems, setCartItems }) => {
             borderRadius: "10px",
             p: 3,
             cursor: "pointer",
-            position: "sticky",
-            bottom: 0,
+            position:'sticky',
+            bottom:0
           }}
-          onClick={() => handleAddToCart(product)}
+         onClick={() => handleAddToCart(product)}
         >
           <Grid item lg={6} md={6} sm={6} xs={6}>
             <span style={{ color: "white", fontSize: "14px" }}>
@@ -378,8 +416,6 @@ const Product = ({ cartItems, setCartItems }) => {
       </Grid>
       <Footer />
     </>
-  ) : (
-    <CircularProgress/>
   );
 };
 

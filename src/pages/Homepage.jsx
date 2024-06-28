@@ -40,6 +40,7 @@ const API = "https://api.adelsocial.com/api/product";
 
 
 const Homepage = () => {
+  
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 

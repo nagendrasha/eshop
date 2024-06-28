@@ -27,7 +27,7 @@ const Category = () => {
   };
 
   console.log(data);
-
+  
   useEffect(() => {
     getProducts();
   }, []);
