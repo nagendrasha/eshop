@@ -6,7 +6,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import MoneyIcon from "@mui/icons-material/Money";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import GooglePayIcon from '@mui/icons-material/Google'; // Ensure you have an appropriate icon for Google Pay
+import GooglePayIcon from "@mui/icons-material/Google";
 import Payment_img from "../assets/payment.png";
 import upi from "../assets/upi-2.gif";
 import Footer from "../components/Footer";
@@ -30,7 +30,7 @@ const Payment = () => {
     setSelectedMethod(id);
     if (id !== 'cod') {
       try {
-        const paymentUrl = constructPaymentUrl(totalPrice);
+        const paymentUrl = constructPaymentUrl(id, totalPrice);
         console.log('Redirecting to payment URL:', paymentUrl);
         window.location.href = paymentUrl;
       } catch (error) {
@@ -40,19 +40,34 @@ const Payment = () => {
     }
   };
 
-  const constructPaymentUrl = (amount) => {
-    const baseUrl = "paytmmp://pay";
-    const params = new URLSearchParams({
-      pa: "MAB0450929A0151206@yesbank",
-      pn: "Online Shopping",
-      am: amount.toFixed(2),
-      tr: "H2MkMGf5olejI",
-      mc: "8931",
-      cu: "INR",
-      tn: "Online Shopping"
-    });
+  const constructPaymentUrl = (method, amount) => {
+    const upiAddress = "MAB0450929A0151206@yesbank";
+    const siteName = "Online Shopping";
+    const amountStr = amount.toFixed(2);
+    const baseParams = `pa=${upiAddress}&pn=${siteName}&am=${amountStr}&tr=H2MkMGf5olejI&mc=8931&cu=INR&tn=${siteName}`;
 
-    return `${baseUrl}?${params.toString()}`;
+    let baseUrl;
+    switch (method) {
+      case "phonepe":
+        baseUrl = `phonepe://pay?${baseParams}`;
+        break;
+      case "paytm":
+        baseUrl = `paytmmp://pay?${baseParams}`;
+        break;
+      case "bhim":
+        baseUrl = `bhim://pay?${baseParams}`;
+        break;
+      case "whatsapp":
+        baseUrl = `whatsapp://pay?${baseParams}`;
+        break;
+      case "gpay":
+        baseUrl = `tez://upi/pay?${baseParams}`;
+        break;
+      default:
+        throw new Error("Unsupported payment method");
+    }
+
+    return baseUrl;
   };
 
   const totalPrice = state?.cartData?.reduce((total, item) => total + item.offer_price, 0);

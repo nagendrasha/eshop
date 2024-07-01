@@ -45,9 +45,13 @@ const Header = () => {
             <Button>
               <FavoriteBorderIcon style={{ color: "black" }} />
             </Button>
-            <Badge  badgeContent={state?.cartData?.length} color="primary">
-            <ShoppingBagOutlinedIcon style={{ color: "black" }} />
-            </Badge>
+            <Button  onClick={() => {
+              navigate("/cart");
+            }}>
+               <Badge  badgeContent={state?.cartData?.length} color="primary">
+               <ShoppingBagOutlinedIcon style={{ color: "black" }} />
+               </Badge>
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
