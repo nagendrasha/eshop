@@ -111,13 +111,13 @@ const Payment = () => {
           <span style={{ fontWeight: 'bold' }}>Total Amount <b style={{ float: 'right' }}>₹ {totalPrice}</b></span>
           <br />
         </Grid>
-        <Grid item lg={6} sm={6} md={6} xs={6}>
+        {/* <Grid item lg={6} sm={6} md={6} xs={6}>
           <span>₹ {totalPrice}</span> <br />
           <span style={{ color: 'red' }}>View More</span>
         </Grid>
         <Grid item lg={6} sm={6} md={6} xs={6}>
           <Button variant="contained" fullWidth sx={{ mt: 2, backgroundColor: '#00321F' }}>Pay Now</Button>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       <Footer />
