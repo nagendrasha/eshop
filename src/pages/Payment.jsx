@@ -22,15 +22,21 @@ const Payment = () => {
     { id: "paytm", label: "Paytm", icon: <AccountBalanceWalletIcon /> },
     { id: "bhim", label: "BHIM UPI", icon: <CreditCardIcon /> },
     { id: "whatsapp", label: "Whatsapp Pay", icon: <WhatsAppIcon /> },
-    { id: "gpay", label: "Google Pay", icon: <GooglePayIcon /> }, // Added Google Pay
+    { id: "gpay", label: "Google Pay", icon: <GooglePayIcon /> },
     { id: "cod", label: "COD", icon: <MoneyIcon /> },
   ];
 
   const handleSelect = (id) => {
     setSelectedMethod(id);
     if (id !== 'cod') {
-      const paymentUrl = constructPaymentUrl(totalPrice);
-      window.location.href = paymentUrl;
+      try {
+        const paymentUrl = constructPaymentUrl(totalPrice);
+        console.log('Redirecting to payment URL:', paymentUrl);
+        window.location.href = paymentUrl;
+      } catch (error) {
+        console.error('Error constructing payment URL:', error);
+        alert('Failed to initiate payment. Please try again.');
+      }
     }
   };
 
@@ -111,14 +117,15 @@ const Payment = () => {
           <span style={{ fontWeight: 'bold' }}>Total Amount <b style={{ float: 'right' }}>₹ {totalPrice}</b></span>
           <br />
         </Grid>
-        {/* <Grid item lg={6} sm={6} md={6} xs={6}>
+        <Grid item lg={6} sm={6} md={6} xs={6}>
           <span>₹ {totalPrice}</span> <br />
           <span style={{ color: 'red' }}>View More</span>
         </Grid>
         <Grid item lg={6} sm={6} md={6} xs={6}>
           <Button variant="contained" fullWidth sx={{ mt: 2, backgroundColor: '#00321F' }}>Pay Now</Button>
-        </Grid> */}
+        </Grid>
       </Grid>
+
       <Footer />
     </>
   );
