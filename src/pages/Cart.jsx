@@ -40,6 +40,13 @@ const Cart = ({ cartItems, setCartItem }) => {
     <>
       <Header />
       <Grid container spacing={2} sx={{ padding: "10px" }}>
+
+       <Box sx={{ boxShadow:'5px',borderRadius:'10px' }}>
+        
+
+
+       </Box>
+
         {state?.cartData?.map((item) => (
           <Grid key={item.id} container fullWidth>
             <Grid

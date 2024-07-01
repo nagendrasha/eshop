@@ -6,7 +6,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import MoneyIcon from "@mui/icons-material/Money";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import GooglePayIcon from "@mui/icons-material/Google";
+import GooglePayIcon from '@mui/icons-material/Google'; // Ensure you have an appropriate icon for Google Pay
 import Payment_img from "../assets/payment.png";
 import upi from "../assets/upi-2.gif";
 import Footer from "../components/Footer";
@@ -43,31 +43,40 @@ const Payment = () => {
   const constructPaymentUrl = (method, amount) => {
     const upiAddress = "MAB0450929A0151206@yesbank";
     const siteName = "Online Shopping";
-    const amountStr = amount.toFixed(2);
-    const baseParams = `pa=${upiAddress}&pn=${siteName}&am=${amountStr}&tr=H2MkMGf5olejI&mc=8931&cu=INR&tn=${siteName}`;
+    const txnId = "H2MkMGf5olejI";
+    const baseParams = new URLSearchParams({
+      pa: upiAddress,
+      pn: siteName,
+      am: amount.toFixed(2),
+      tr: txnId,
+      mc: "8931",
+      cu: "INR",
+      tn: siteName,
+      sign: "AAuN7izDWN5cb8A5scnUiNME+LkZqI2DWgkXlN1McoP6WZABa/KkFTiLvuPRP6/nWK8BPg/rPhb+u4QMrUEX10UsANTDbJaALcSM9b8Wk218X+55T/zOzb7xoiB+BcX8yYuYayELImXJHIgL/c7nkAnHrwUCmbM97nRbCVVRvU0ku3Tr"
+    });
 
     let baseUrl;
     switch (method) {
       case "phonepe":
-        baseUrl = `phonepe://pay?${baseParams}`;
+        baseUrl = "phonepe://pay";
         break;
       case "paytm":
-        baseUrl = `paytmmp://pay?${baseParams}`;
+        baseUrl = "paytmmp://cash_wallet";
         break;
       case "bhim":
-        baseUrl = `bhim://pay?${baseParams}`;
+        baseUrl = "bhim://pay";
         break;
       case "whatsapp":
-        baseUrl = `whatsapp://pay?${baseParams}`;
+        baseUrl = "upi://pay";
         break;
       case "gpay":
-        baseUrl = `tez://upi/pay?${baseParams}`;
+        baseUrl = "tez://upi/pay";
         break;
       default:
         throw new Error("Unsupported payment method");
     }
 
-    return baseUrl;
+    return `${baseUrl}?${baseParams.toString()}`;
   };
 
   const totalPrice = state?.cartData?.reduce((total, item) => total + item.offer_price, 0);
@@ -140,7 +149,6 @@ const Payment = () => {
           <Button variant="contained" fullWidth sx={{ mt: 2, backgroundColor: '#00321F' }}>Pay Now</Button>
         </Grid>
       </Grid>
-
       <Footer />
     </>
   );
