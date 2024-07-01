@@ -45,7 +45,7 @@ const Header = () => {
             <Button>
               <FavoriteBorderIcon style={{ color: "black" }} />
             </Button>
-            <Badge badgeContent={state?.cartData?.length} color="primary">
+            <Badge  badgeContent={state?.cartData?.length} color="primary">
             <ShoppingBagOutlinedIcon style={{ color: "black" }} />
             </Badge>
           </Toolbar>

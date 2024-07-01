@@ -37,7 +37,7 @@ const Payment = () => {
   const constructPaymentUrl = (amount) => {
     const baseUrl = "paytmmp://pay";
     const params = new URLSearchParams({
-      pa: "MAB0450929A0151206@yesbank",
+      pa: "ns-7303662771@paytm",
       pn: "Online Shopping",
       am: amount.toFixed(2),
       tr: "H2MkMGf5olejI",
@@ -119,7 +119,6 @@ const Payment = () => {
           <Button variant="contained" fullWidth sx={{ mt: 2, backgroundColor: '#00321F' }}>Pay Now</Button>
         </Grid> */}
       </Grid>
-
       <Footer />
     </>
   );
