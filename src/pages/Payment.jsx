@@ -37,7 +37,7 @@ const Payment = () => {
   const constructPaymentUrl = (amount) => {
     const baseUrl = "paytmmp://pay";
     const params = new URLSearchParams({
-      pa: "ns-7303662771@paytm",
+      pa: "MAB0450929A0151206@yesbank",
       pn: "Online Shopping",
       am: amount.toFixed(2),
       tr: "H2MkMGf5olejI",
