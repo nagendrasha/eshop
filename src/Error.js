@@ -1,9 +1,9 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import error from "./assets/error.jpg";
 import { useNavigate } from "react-router-dom";
+import error from "./assets/error.jpg";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 const Error = () => {
     const navigate = useNavigate();

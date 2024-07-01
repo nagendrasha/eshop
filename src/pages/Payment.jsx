@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, Snackbar, Alert } from "@mui/material";
 import Countdown from "react-countdown";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
@@ -16,6 +16,7 @@ import { AppContext } from "../context/ProductContext";
 const Payment = () => {
   const { state } = useContext(AppContext);
   const [selectedMethod, setSelectedMethod] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const methods = [
     { id: "phonepe", label: "Phone Pay", icon: <PhoneIphoneIcon /> },
@@ -27,6 +28,11 @@ const Payment = () => {
   ];
 
   const handleSelect = (id) => {
+    if (id === 'cod') {
+      setSnackbarOpen(true);
+      return;
+    }
+
     setSelectedMethod(id);
     if (id !== 'cod') {
       try {
@@ -38,6 +44,10 @@ const Payment = () => {
         alert('Failed to initiate payment. Please try again.');
       }
     }
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   const constructPaymentUrl = (method, amount) => {
@@ -75,6 +85,9 @@ const Payment = () => {
       default:
         throw new Error("Unsupported payment method");
     }
+
+    // Additional logging for debugging
+    console.log(`Constructed URL for ${method}: ${baseUrl}?${baseParams.toString()}`);
 
     return `${baseUrl}?${baseParams.toString()}`;
   };
@@ -141,14 +154,21 @@ const Payment = () => {
           <span style={{ fontWeight: 'bold' }}>Total Amount <b style={{ float: 'right' }}>₹ {totalPrice}</b></span>
           <br />
         </Grid>
-        <Grid item lg={6} sm={6} md={6} xs={6}>
+        {/* <Grid item lg={6} sm={6} md={6} xs={6}>
           <span>₹ {totalPrice}</span> <br />
           <span style={{ color: 'red' }}>View More</span>
         </Grid>
         <Grid item lg={6} sm={6} md={6} xs={6}>
           <Button variant="contained" fullWidth sx={{ mt: 2, backgroundColor: '#00321F' }}>Pay Now</Button>
-        </Grid>
+        </Grid> */}
       </Grid>
+
+      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity="warning" sx={{ width: '100%' }}>
+          Not Available for Cash on Delivery
+        </Alert>
+      </Snackbar>
+
       <Footer />
     </>
   );

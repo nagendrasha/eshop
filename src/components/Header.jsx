@@ -1,9 +1,9 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { AppBar, Badge, Box, Button, Toolbar, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import logo from "../assets/logo-2.png";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo-2.png";
 import { AppContext } from "../context/ProductContext";
 
 const Header = () => {

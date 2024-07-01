@@ -1,13 +1,13 @@
+import { Box, Grid } from "@mui/material";
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Newsletter from "../components/Newsletter";
-import { Box, Grid, Typography } from "@mui/material";
-import pay from "../assets/pay.png";
-import van from "../assets/van.png";
 import cancel from "../assets/cancel.png";
 import exchange from "../assets/exhange.png";
+import pay from "../assets/pay.png";
 import size from "../assets/size.png";
+import van from "../assets/van.png";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Newsletter from "../components/Newsletter";
 
 const Faq = () => {
   const items = [

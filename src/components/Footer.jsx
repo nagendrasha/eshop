@@ -1,16 +1,16 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import React from "react";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {

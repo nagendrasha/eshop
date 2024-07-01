@@ -8,6 +8,8 @@ import safty from "../assets/safty.png";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { AppContext } from "../context/ProductContext";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+
 
 const Cart = ({ cartItems, setCartItem }) => {
   const navigate = useNavigate();
@@ -36,18 +38,30 @@ const Cart = ({ cartItems, setCartItem }) => {
     randomWatch();
   }, []);
 
+
   return (
     <>
       <Header />
-      <Grid container spacing={2} sx={{ padding: "10px" }}>
+      <Grid container spacing={2} sx={{ padding: "20px" }}>
 
-       <Box sx={{ boxShadow:'5px',borderRadius:'10px' }}>
-        
-
-
-       </Box>
-
-        {state?.cartData?.map((item) => (
+      {state?.cartData?.length === 0 ? (
+        <Grid
+        item lg={12} sm={12} xs={12} md={12}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            boxShadow:'5px',
+            
+          }}>
+          <ShoppingBagOutlinedIcon sx={{mt:2, fontSize:'50px'}}/>
+          <Typography variant="h4">Your cart is empty</Typography>
+          <span>Let's go Buy Somthing!</span>
+          <Button variant="contained" sx={{mt:2}} onClick={()=>{navigate('/')}} >Shop Now</Button>
+        </Grid>
+      ) : (
+        state.cartData.map((item) => (
           <Grid key={item.id} container fullWidth>
             <Grid
               container
@@ -60,7 +74,7 @@ const Cart = ({ cartItems, setCartItem }) => {
                   md: "10px",
                   xs: "10px",
                 },
-                marginBottom: "10px"
+                marginBottom: "10px",
               }}
             >
               <Grid item lg={4} md={4} sm={3} xs={4}>
@@ -68,7 +82,7 @@ const Cart = ({ cartItems, setCartItem }) => {
                   <img
                     src={`https://api.adelsocial.com/${item.thumb_image}`}
                     alt={item.name}
-                    style={{ width: "160px", height: "130px" }}
+                    style={{ width: "120px", height: "130px" }}
                   />
                 </Box>
               </Grid>
@@ -117,7 +131,8 @@ const Cart = ({ cartItems, setCartItem }) => {
               </Grid>
             </Grid>
           </Grid>
-        ))}
+        ))
+      )}
 
         <Grid container fullWidth >
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ p: 2 }}>
@@ -163,7 +178,7 @@ const Cart = ({ cartItems, setCartItem }) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container sx={{ p:{lg:'0px',sm:'10',xs:'10px'} }}>
         <Grid item lg={12} sx={{ mt: 2 }}>
           <img src={safty} alt="" style={{ width: "100%" }} />
         </Grid>

@@ -13,7 +13,7 @@ const Checkout = () => {
 
     <>
       <Header />
-      <Grid container>
+      <Grid container sx={{ p:{lg:'0px',sm:'10px',xs:'10px'} }}>
         <Box sx={{ backgroundColor: "#F2F2F3", width: "100%", p: 2 }}>
           <span
             style={{ fontSize: "12px", marginLeft: "10px", fontWeight: "bold" }}
