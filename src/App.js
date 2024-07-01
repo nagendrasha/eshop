@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Error from "./Error";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Category from "./pages/Category";
-import Charkha from "./pages/Charkha";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
@@ -16,7 +16,6 @@ import Refundreturn from "./pages/Refundreturn";
 import Shoppolicy from "./pages/Shoppolicy";
 import Termsofservice from "./pages/Termsofservice";
 import Trackorder from "./pages/Trackorder";
-import { useState } from "react";
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Homepage cartItems={cartItems} setCartItems={setCartItems} />} />
-          <Route exact path="/charkha" element={<Charkha />} />
           <Route exact path="/single-product/:slug" element={<Product cartItems={cartItems} setCartItems={setCartItems}  />} />
           <Route exact path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
           <Route exact path="/checkout" element={<Checkout cartItems={cartItems} />} />

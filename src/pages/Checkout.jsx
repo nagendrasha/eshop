@@ -2,9 +2,15 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  return (
+
+
+  const navigate = useNavigate();
+
+  return (    
+
     <>
       <Header />
       <Grid container>
@@ -81,7 +87,9 @@ const Checkout = () => {
             Work
           </Button>
         </Box>
-        <Button variant="contained" fullWidth sx={{mt:2,backgroundColor:'#00321F'}}>ADD ADDRESS</Button>
+        <Button variant="contained" fullWidth sx={{mt:2,backgroundColor:'#00321F'}} onClick={() => {
+                  navigate("/checkout/payment");
+                }} >ADD ADDRESS</Button>
       </Grid>
       <Footer />
     </>
