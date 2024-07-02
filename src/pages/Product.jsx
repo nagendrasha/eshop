@@ -25,7 +25,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "../context/ProductContext";
 
-const API = "https://api.adelsocial.com/api/product/";
+
 
 const Product = ({ cartItems, setCartItems }) => {
   const { slug } = useParams();
@@ -34,7 +34,7 @@ const Product = ({ cartItems, setCartItems }) => {
   const [product, setProduct] = useState(null);
 
   const getProduct = async () => {
-    const res = await axios.get(`${API}${slug}`);
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}${slug}`);
     setProduct(res.data.product);
   };
 
@@ -99,7 +99,7 @@ const Product = ({ cartItems, setCartItems }) => {
       <Grid container sx={{ p: { lg: "0px", sm: "5px", xs: "10px" } }}>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <img
-            src={`https://api.adelsocial.com/` + product.thumb_image}
+            src={process.env.REACT_APP_API_URL2 + product.thumb_image}
             alt="product"
             style={{
               width: "300px",
@@ -128,7 +128,7 @@ const Product = ({ cartItems, setCartItems }) => {
         <Grid item lg={3} md={3} sm={3} xs={3}>
           <Box sx={{ border: "2px solid black", borderRadius: "10px" }}>
             <img
-              src={`https://api.adelsocial.com/` + product.thumb_image}
+              src={process.env.REACT_APP_API_URL2 + product.thumb_image}
               alt="product"
               style={{
                 width: "100px",

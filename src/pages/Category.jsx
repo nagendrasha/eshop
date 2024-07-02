@@ -15,14 +15,12 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 
-const API = "https://api.adelsocial.com/api/product";
-
 const Category = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   const getProducts = async () => {
-    const res = await axios.get(API);
+    const res = await axios.get(process.env.REACT_APP_API_URL);
     setData(res.data.products.data);
   };
 
@@ -47,7 +45,7 @@ const Category = () => {
               >
                 <CardContent>
                   <img
-                    src={`https://api.adelsocial.com/` + e.thumb_image}
+                    src={`${process.env.REACT_APP_API_URL2}${e.thumb_image}`}
                     alt="product"
                     style={{
                       width: "120px",

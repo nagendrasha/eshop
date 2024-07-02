@@ -1,10 +1,9 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
+import { createContext, useEffect, useReducer } from "react";
 import reducer from "../reducer/productReducer";
 
 export const AppContext = createContext('');
 
-const API = "https://api.adelsocial.com/api/product";
 
 const initialState = {
   isLoading: false,
@@ -30,7 +29,7 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getProducts(API);
+    getProducts(process.env.REACT_APP_API_URL);
   }, []);
 
   return (

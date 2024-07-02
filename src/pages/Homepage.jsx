@@ -36,8 +36,6 @@ const slideImages = [
   },
 ];
 
-const API = "https://api.adelsocial.com/api/product";
-
 
 const Homepage = () => {
   
@@ -45,7 +43,7 @@ const Homepage = () => {
   const [data, setData] = useState([]);
 
   const getProducts = async () => {
-    const res = await axios.get(API);
+    const res = await axios.get(process.env.REACT_APP_API_URL);
     setData(res.data.products.data);
   };
 
