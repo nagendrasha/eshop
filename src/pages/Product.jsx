@@ -42,6 +42,10 @@ const Product = ({ cartItems, setCartItems }) => {
     getProduct();
   }, [slug]);
 
+  const stripHtmlTags = (html) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, "");
+  };
+
   const handleAddToCart = (product) => {
     console.log('products',product)
     dispatch({type:'ADDTOCART',payload:product})
@@ -102,7 +106,7 @@ const Product = ({ cartItems, setCartItems }) => {
             src={process.env.REACT_APP_API_URL2 + product.thumb_image}
             alt="product"
             style={{
-              width: "300px",
+              width: "auto",
               margin: "auto",
               display: "block",
               height: "280px",
@@ -118,8 +122,9 @@ const Product = ({ cartItems, setCartItems }) => {
               display: "flex",
               alignItems: "center",
               width: "40px",
-              zIndex: "1000",
+              zIndex: "9999",
               float: "right",
+              position:'relative'
             }}
           >
             4.6 <StarIcon sx={{ fontSize: "16px", color: "green" }} />{" "}
@@ -131,7 +136,7 @@ const Product = ({ cartItems, setCartItems }) => {
               src={process.env.REACT_APP_API_URL2 + product.thumb_image}
               alt="product"
               style={{
-                width: "100px",
+                width: "auto",
                 margin: "auto",
                 display: "block",
                 height: "100px",
@@ -193,7 +198,7 @@ const Product = ({ cartItems, setCartItems }) => {
           <Typography sx={{ fontWeight: "bold", marginTop: "30px" }}>
             Product Details
           </Typography>
-          <span>{product.long_description}</span>
+          <span>{stripHtmlTags(product.long_description)}</span>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Box>

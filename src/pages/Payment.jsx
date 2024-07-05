@@ -20,10 +20,10 @@ const Payment = () => {
 
   const methods = [
     { id: "phonepe", label: "Phone Pay", icon: <PhoneIphoneIcon /> },
-    { id: "paytm", label: "Paytm", icon: <AccountBalanceWalletIcon /> },
+    // { id: "paytm", label: "Paytm", icon: <AccountBalanceWalletIcon /> },
     { id: "bhim", label: "BHIM UPI", icon: <CreditCardIcon /> },
     { id: "whatsapp", label: "Whatsapp Pay", icon: <WhatsAppIcon /> },
-    { id: "gpay", label: "Google Pay", icon: <GooglePayIcon /> },
+    // { id: "gpay", label: "Google Pay", icon: <GooglePayIcon /> },
     { id: "cod", label: "COD", icon: <MoneyIcon /> },
   ];
 
@@ -51,7 +51,7 @@ const Payment = () => {
   };
 
   const constructPaymentUrl = (method, amount) => {
-    const upiAddress = "MAB0450929A0151206@yesbank";
+    const upiAddress = "merchant1601549.augp@aubank";
     const siteName = "Online Shopping";
     const txnId = "H2MkMGf5olejI";
     const baseParams = new URLSearchParams({

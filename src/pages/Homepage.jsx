@@ -36,9 +36,7 @@ const slideImages = [
   },
 ];
 
-
 const Homepage = () => {
-  
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
@@ -136,13 +134,13 @@ const Homepage = () => {
               >
                 <CardContent>
                   <img
-                    src={`https://api.adelsocial.com/` + e.thumb_image}
+                    src={process.env.REACT_APP_API_URL2 + e.thumb_image}
                     alt="product"
                     style={{
-                      width: "120px",
+                      width: "auto",
                       margin: "auto",
                       display: "block",
-                      height: "120px",
+                      height: "200px",
                     }}
                   />
                   <span
@@ -156,12 +154,13 @@ const Homepage = () => {
                       alignItems: "center",
                       width: "30px",
                       zIndex: 9999,
+                      position: "relative", // or 'absolute', 'fixed' depending on your layout needs
                     }}
                   >
-                    4.6
-                    {e.rating}{" "}
-                    <StarIcon sx={{ fontSize: "14px", color: "green" }} />{" "}
+                    4.6 {e.rating}{" "}
+                    <StarIcon sx={{ fontSize: "14px", color: "green" }} />
                   </span>
+
                   <Grid container>
                     <Grid item lg={10} md={10} sm={10} xs={10}>
                       <span

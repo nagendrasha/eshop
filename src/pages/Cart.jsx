@@ -78,7 +78,7 @@ const Cart = ({ cartItems, setCartItem }) => {
             >
               <Grid item lg={4} md={4} sm={3} xs={4}>
                 <Box>
-                <img src={`${process.env.REACT_APP_API_URL2}${item.thumb_image}`} alt="Product Thumbnail" style={{width:'120px',height:'130px'}} />
+                <img src={`${process.env.REACT_APP_API_URL2}${item.thumb_image}`} alt="Product Thumbnail" style={{width:'auto',height:'130px'}} />
                 </Box>
               </Grid>
               <Grid item lg={8} md={8} sm={8} xs={8}>
